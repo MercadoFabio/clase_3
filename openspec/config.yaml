@@ -1,0 +1,65 @@
+schema: spec-driven
+
+context: |
+  Stack inferido: SPA didáctica con HTML semántico, JavaScript vanilla ES Modules, Tailwind CSS y Vite.
+  Arquitectura esperada: separación por servicios, estado y UI; sin framework de componentes ni backend real.
+  Fuente de verdad: dashboard-inversiones-requerimientos.md.
+  Estado actual: no hay scaffold de app ni tooling ejecutable detectado en el repo.
+  Estilo: enfoque pedagógico, modular, accesible y con manipulación segura del DOM.
+
+strict_tdd: true
+language: es
+persistence: hybrid
+
+testing:
+  strict_tdd: true
+  detected: 2026-04-17
+  test_runner:
+    available: false
+    framework: null
+    command: null
+  layers:
+    unit:
+      available: false
+      tool: null
+    integration:
+      available: false
+      tool: null
+    e2e:
+      available: false
+      tool: null
+  coverage:
+    available: false
+    command: null
+  quality_tools:
+    linter:
+      available: false
+      command: null
+    type_checker:
+      available: false
+      command: null
+    formatter:
+      available: false
+      command: null
+
+rules:
+  proposal:
+    - Incluir plan de rollback para cambios riesgosos
+    - Identificar módulos o carpetas afectadas
+  specs:
+    - Usar formato Dado/Cuando/Entonces
+    - Usar palabras RFC 2119: DEBE, DEBERÍA, PUEDE
+  design:
+    - Documentar decisiones con justificación pedagógica
+    - Incluir diagramas simples si el flujo lo necesita
+  tasks:
+    - Agrupar por fases y numeración jerárquica
+    - Mantener tareas chicas para una clase o sesión
+  apply:
+    - Respetar separación entre estado, servicios y UI
+    - Evitar innerHTML inseguro y variables globales
+  verify:
+    - Verificar manualmente hasta instalar infraestructura de tests
+    - Contrastar implementación contra cada escenario de specs
+  archive:
+    - Advertir antes de archivar cambios con remociones grandes

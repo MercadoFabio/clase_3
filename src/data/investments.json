@@ -1,0 +1,122 @@
+[
+  {
+    "id": "inv-aapl",
+    "name": "Apple",
+    "symbol": "AAPL",
+    "category": "Tecnología",
+    "riskLevel": "Medio",
+    "investedAmount": 2400,
+    "currentValue": 2585,
+    "dailyChangePercent": 1.42,
+    "favorite": false,
+    "description": "Empresa tecnológica global con foco en hardware, servicios y ecosistema propio."
+  },
+  {
+    "id": "inv-msft",
+    "name": "Microsoft",
+    "symbol": "MSFT",
+    "category": "Tecnología",
+    "riskLevel": "Medio",
+    "investedAmount": 2100,
+    "currentValue": 2310,
+    "dailyChangePercent": 0.88,
+    "favorite": false,
+    "description": "Compañía diversificada en software, nube e inteligencia artificial."
+  },
+  {
+    "id": "inv-vti",
+    "name": "Vanguard Total Stock Market ETF",
+    "symbol": "VTI",
+    "category": "ETF",
+    "riskLevel": "Bajo",
+    "investedAmount": 3200,
+    "currentValue": 3340,
+    "dailyChangePercent": 0.36,
+    "favorite": false,
+    "description": "ETF amplio del mercado estadounidense, útil para diversificación general."
+  },
+  {
+    "id": "inv-ko",
+    "name": "Coca-Cola",
+    "symbol": "KO",
+    "category": "Consumo defensivo",
+    "riskLevel": "Bajo",
+    "investedAmount": 1450,
+    "currentValue": 1498,
+    "dailyChangePercent": 0.21,
+    "favorite": false,
+    "description": "Acción defensiva de consumo masivo con historial de dividendos estable."
+  },
+  {
+    "id": "inv-jnj",
+    "name": "Johnson & Johnson",
+    "symbol": "JNJ",
+    "category": "Salud",
+    "riskLevel": "Bajo",
+    "investedAmount": 1680,
+    "currentValue": 1615,
+    "dailyChangePercent": -0.47,
+    "favorite": false,
+    "description": "Empresa del sector salud con exposición a dispositivos médicos y farmacéutica."
+  },
+  {
+    "id": "inv-xom",
+    "name": "Exxon Mobil",
+    "symbol": "XOM",
+    "category": "Energía",
+    "riskLevel": "Medio",
+    "investedAmount": 1750,
+    "currentValue": 1692,
+    "dailyChangePercent": -1.14,
+    "favorite": false,
+    "description": "Compañía energética tradicional, sensible al precio internacional del petróleo."
+  },
+  {
+    "id": "inv-bac",
+    "name": "Bank of America",
+    "symbol": "BAC",
+    "category": "Finanzas",
+    "riskLevel": "Medio",
+    "investedAmount": 1300,
+    "currentValue": 1388,
+    "dailyChangePercent": 1.09,
+    "favorite": false,
+    "description": "Banco global expuesto al ciclo financiero y a tasas de interés."
+  },
+  {
+    "id": "inv-nvda",
+    "name": "NVIDIA",
+    "symbol": "NVDA",
+    "category": "Semiconductores",
+    "riskLevel": "Alto",
+    "investedAmount": 1950,
+    "currentValue": 2285,
+    "dailyChangePercent": 2.74,
+    "favorite": false,
+    "description": "Fabricante de chips con alta volatilidad y fuerte crecimiento reciente."
+  },
+  {
+    "id": "inv-meli",
+    "name": "Mercado Libre",
+    "symbol": "MELI",
+    "category": "E-commerce",
+    "riskLevel": "Alto",
+    "investedAmount": 1600,
+    "currentValue": 1542,
+    "dailyChangePercent": -0.92,
+    "favorite": false,
+    "description": "Empresa latinoamericana de comercio electrónico y fintech con valuación exigente."
+  },
+  {
+    "id": "inv-arkk",
+    "name": "ARK Innovation ETF",
+    "symbol": "ARKK",
+    "category": "ETF temático",
+    "riskLevel": "Alto",
+    "investedAmount": 980,
+    "currentValue": 905,
+    "dailyChangePercent": -1.68,
+    "favorite": false,
+    "description": "ETF temático de innovación disruptiva, útil para discutir volatilidad y concentración."
+  }
+]

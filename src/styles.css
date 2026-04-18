@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(59, 130, 246, 0.12), transparent 35%),
+    #f8fafc;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.app-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1d4ed8;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.page-intro {
+  margin: 0.75rem 0 0;
+  max-width: 68ch;
+  color: #334155;
+}
+
+.dashboard-layout {
+  display: grid;
+  gap: 1rem;
+}
+
+.panel {
+  padding: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.panel--full {
+  min-height: 18rem;
+}
+
+.section-heading {
+  margin-bottom: 1rem;
+}
+
+.section-heading h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+}
+
+.section-heading p {
+  margin: 0;
+  color: #475569;
+}
+
+.summary-grid,
+.filters-grid,
+.list-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.summary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.metric-card,
+.placeholder-card {
+  min-height: 8rem;
+  padding: 1rem;
+  border-radius: 0.875rem;
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.metric-card h3,
+.placeholder-card {
+  margin: 0;
+}
+
+.metric-card p {
+  margin: 0.75rem 0 0;
+  color: #334155;
+}
+
+.filters-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.field-group {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.field-group label {
+  font-weight: 600;
+}
+
+.field-group input,
+.field-group select,
+.field-group button,
+.list-grid button {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  background-color: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.status-stack {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.status-stack p {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  background-color: #dbeafe;
+  color: #1e3a8a;
+}
+
+#error-state {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+#empty-state {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.modal-root {
+  position: relative;
+  z-index: 20;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background-color: rgba(15, 23, 42, 0.64);
+}
+
+.modal-surface {
+  width: min(100%, 42rem);
+  max-height: 90vh;
+  overflow: auto;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+}
+
+@media (min-width: 860px) {
+  .dashboard-layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .dashboard-layout > .panel:nth-child(1) {
+    grid-column: span 7;
+  }
+
+  .dashboard-layout > .panel:nth-child(2) {
+    grid-column: span 5;
+  }
+
+  .dashboard-layout > .panel:nth-child(3) {
+    grid-column: span 4;
+  }
+
+  .dashboard-layout > .panel:nth-child(4) {
+    grid-column: span 8;
+  }
+}
