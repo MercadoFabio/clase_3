@@ -33,4 +33,4 @@
 - [x] 5.1 Verificar layout semántico, labels, foco visible y nombres accesibles recorriendo toda la pantalla con teclado. Dep: 4.4.
 - [x] 5.2 Verificar escenarios de `loading`, `error`, `ready` y `empty`, incluyendo mensaje sin resultados y ausencia de tarjetas en error. Dep: 4.4.
 - [x] 5.3 Verificar búsqueda `AAPL`, filtro por riesgo, ordenamiento, favoritos persistidos y resumen calculado sobre dataset completo. Dep: 4.4.
-- [ ] 5.4 Hacer repaso pedagógico final: responsabilidades por carpeta (`data`, `services`, `state`, `ui`, `utils`) y puntos críticos para clase. Dep: 5.1-5.3.
+- [x] 5.4 Hacer repaso pedagógico final: responsabilidades por carpeta (`data`, `services`, `state`, `ui`, `utils`) y puntos críticos para clase. Dep: 5.1-5.3.

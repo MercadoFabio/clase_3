@@ -39,10 +39,7 @@ None — implementation matches design.
 None.
 
 ## Remaining Tasks
-- [ ] 5.1 Verificar layout semántico, labels, foco visible y nombres accesibles.
-- [ ] 5.2 Verificar escenarios de `loading`, `error`, `ready` y `empty`.
-- [ ] 5.3 Verificar búsqueda `AAPL`, filtro por riesgo, ordenamiento, favoritos persistidos y resumen calculado sobre dataset completo.
-- [ ] 5.4 Hacer repaso pedagógico final.
+- Ninguna. La fase 5 quedó verificada manualmente.
 
 ## Status
-16/20 tasks complete. Ready for next dependency-ready batch (5.1-5.4).
+20/20 tasks complete. App lista para cierre de cambio / verify final.
