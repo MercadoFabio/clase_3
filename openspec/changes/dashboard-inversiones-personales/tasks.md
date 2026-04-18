@@ -24,13 +24,13 @@
 ## Fase 4: Integración e interacciones
 
 - [x] 4.1 **[CRÍTICA]** Implementar `src/main.js` para bootstrap inicial, transición `loading → ready/error` y render por regiones. Dep: 1.2, 1.3, 2.4, 2.5, 3.1-3.4.
-- [ ] 4.2 Conectar eventos delegados de filtros y orden para actualizar store y rerenderizar listado sin recarga. Dep: 4.1.
-- [ ] 4.3 Conectar toggle de favoritos con persistencia y rehidratación tras recarga. Dep: 4.1.
-- [ ] 4.4 Conectar apertura/cierre del modal desde listado y teclado, preservando foco del disparador. Dep: 4.1.
+- [x] 4.2 Conectar eventos delegados de filtros y orden para actualizar store y rerenderizar listado sin recarga. Dep: 4.1.
+- [x] 4.3 Conectar toggle de favoritos con persistencia y rehidratación tras recarga. Dep: 4.1.
+- [x] 4.4 Conectar apertura/cierre del modal desde listado y teclado, preservando foco del disparador. Dep: 4.1.
 
 ## Fase 5: Verificación manual pedagógica
 
-- [ ] 5.1 Verificar layout semántico, labels, foco visible y nombres accesibles recorriendo toda la pantalla con teclado. Dep: 4.4.
-- [ ] 5.2 Verificar escenarios de `loading`, `error`, `ready` y `empty`, incluyendo mensaje sin resultados y ausencia de tarjetas en error. Dep: 4.4.
-- [ ] 5.3 Verificar búsqueda `AAPL`, filtro por riesgo, ordenamiento, favoritos persistidos y resumen calculado sobre dataset completo. Dep: 4.4.
+- [x] 5.1 Verificar layout semántico, labels, foco visible y nombres accesibles recorriendo toda la pantalla con teclado. Dep: 4.4.
+- [x] 5.2 Verificar escenarios de `loading`, `error`, `ready` y `empty`, incluyendo mensaje sin resultados y ausencia de tarjetas en error. Dep: 4.4.
+- [x] 5.3 Verificar búsqueda `AAPL`, filtro por riesgo, ordenamiento, favoritos persistidos y resumen calculado sobre dataset completo. Dep: 4.4.
 - [ ] 5.4 Hacer repaso pedagógico final: responsabilidades por carpeta (`data`, `services`, `state`, `ui`, `utils`) y puntos críticos para clase. Dep: 5.1-5.3.

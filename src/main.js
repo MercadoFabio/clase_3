@@ -223,10 +223,10 @@ function closeDetail(appRegions) {
     return;
   }
 
-  const returnFocusTarget = resolveReturnFocusTarget(appRegions, currentState);
+  const selectedId = currentState.selectedId;
 
   investmentStore.clearSelection();
-  restoreFocus(returnFocusTarget);
+  restoreFocus(resolveReturnFocusTarget(appRegions, selectedId));
 }
 
 function setControlsAvailability(filtersForm, isEnabled) {
@@ -251,16 +251,12 @@ function getSelectedItem(state) {
   return state.items.find((item) => item.id === state.selectedId) ?? null;
 }
 
-function resolveReturnFocusTarget(appRegions, state) {
-  if (state.lastTrigger instanceof HTMLElement && state.lastTrigger.isConnected) {
-    return state.lastTrigger;
-  }
-
-  if (!state.selectedId) {
+function resolveReturnFocusTarget(appRegions, selectedId) {
+  if (!selectedId) {
     return null;
   }
 
-  const selector = `button[data-action="open-detail"][data-id="${state.selectedId}"]`;
+  const selector = `button[data-action="open-detail"][data-id="${selectedId}"]`;
   const triggerButton = appRegions.listRegion.querySelector(selector);
 
   return triggerButton instanceof HTMLElement ? triggerButton : null;
