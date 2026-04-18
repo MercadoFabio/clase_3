@@ -1,4 +1,5 @@
 export const FAVORITES_STORAGE_KEY = 'investment-favorites';
+export const THEME_STORAGE_KEY = 'investment-theme';
 
 function getBrowserStorage() {
   if (typeof globalThis === 'undefined' || !('localStorage' in globalThis)) {
@@ -53,4 +54,34 @@ export function toggleFavoriteId(id, storage = getBrowserStorage()) {
   writeFavoriteIds(nextIds, storage);
 
   return nextIds;
+}
+
+export function readThemePreference(storage = getBrowserStorage()) {
+  if (!storage) {
+    return null;
+  }
+
+  try {
+    const rawValue = storage.getItem(THEME_STORAGE_KEY);
+    return rawValue === 'dark' || rawValue === 'light' ? rawValue : null;
+  } catch {
+    return null;
+  }
+}
+
+export function writeThemePreference(theme, storage = getBrowserStorage()) {
+  if (!storage) {
+    return false;
+  }
+
+  if (theme !== 'dark' && theme !== 'light') {
+    return false;
+  }
+
+  try {
+    storage.setItem(THEME_STORAGE_KEY, theme);
+    return true;
+  } catch {
+    return false;
+  }
 }

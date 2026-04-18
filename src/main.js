@@ -6,12 +6,16 @@ import { renderDetailPanel } from './ui/render-detail-panel.js';
 import { readFiltersFromForm, renderFilters } from './ui/render-filters.js';
 import { renderInvestmentList } from './ui/render-investment-list.js';
 import { renderSummary } from './ui/render-summary.js';
+import { readThemePreference, writeThemePreference } from './utils/storage.js';
 import { clearElement } from './utils/dom.js';
+
+initializeTheme();
 
 const regions = getDashboardRegions();
 
 wireDashboardEvents(regions);
 bootstrapDashboard(regions);
+syncThemeToggle(regions.themeToggle);
 
 async function bootstrapDashboard(appRegions) {
   investmentStore.subscribe((state) => {
@@ -29,6 +33,10 @@ async function bootstrapDashboard(appRegions) {
 }
 
 function wireDashboardEvents(appRegions) {
+  appRegions.themeToggle.addEventListener('click', () => {
+    toggleTheme(appRegions.themeToggle);
+  });
+
   appRegions.filtersForm.addEventListener('submit', handleFiltersSubmit);
   appRegions.filtersForm.addEventListener('input', () => {
     syncFiltersFromForm(appRegions.filtersForm);
@@ -59,6 +67,7 @@ function getDashboardRegions() {
   const loadingState = document.querySelector('#loading-state');
   const errorState = document.querySelector('#error-state');
   const emptyState = document.querySelector('#empty-state');
+  const themeToggle = document.querySelector('[data-theme-toggle="true"]');
 
   const missingRegions = [
     ['#app', appRoot],
@@ -69,6 +78,7 @@ function getDashboardRegions() {
     ['#loading-state', loadingState],
     ['#error-state', errorState],
     ['#empty-state', emptyState],
+    ['[data-theme-toggle="true"]', themeToggle],
   ]
     .filter(([, element]) => !(element instanceof HTMLElement))
     .map(([selector]) => selector);
@@ -86,6 +96,7 @@ function getDashboardRegions() {
     loadingState,
     errorState,
     emptyState,
+    themeToggle,
   };
 }
 
@@ -274,4 +285,49 @@ function resolveErrorMessage(error) {
   }
 
   return 'No se pudieron cargar las inversiones. Probá recargar la página.';
+}
+
+function initializeTheme() {
+  const savedTheme = readThemePreference();
+  const systemTheme = globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
+
+  applyTheme(savedTheme ?? systemTheme);
+}
+
+function toggleTheme(themeToggle) {
+  const nextTheme = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+
+  applyTheme(nextTheme);
+  writeThemePreference(nextTheme);
+  syncThemeToggle(themeToggle);
+}
+
+function applyTheme(theme) {
+  const normalizedTheme = theme === 'dark' ? 'dark' : 'light';
+
+  document.documentElement.dataset.theme = normalizedTheme;
+  document.documentElement.style.colorScheme = normalizedTheme;
+}
+
+function getCurrentTheme() {
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+}
+
+function syncThemeToggle(themeToggle) {
+  if (!(themeToggle instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  const isDark = getCurrentTheme() === 'dark';
+  const label = themeToggle.querySelector('[data-theme-toggle-label]');
+
+  themeToggle.setAttribute('aria-pressed', String(isDark));
+  themeToggle.setAttribute('aria-label', isDark ? 'Activar modo claro' : 'Activar modo oscuro');
+  themeToggle.dataset.theme = isDark ? 'dark' : 'light';
+
+  if (label instanceof HTMLElement) {
+    label.textContent = isDark ? 'Oscuro' : 'Claro';
+  }
 }

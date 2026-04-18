@@ -57,6 +57,7 @@ export function renderFilters(formElement, filters = {}) {
 
   const normalizedFilters = normalizeFilters(filters);
 
+  enhanceFilterLayout(elements);
   syncFilterValues(elements, normalizedFilters);
   syncAccessibleHints(elements);
   syncSortOptionLabels(elements.sortSelect);
@@ -111,6 +112,7 @@ function syncAccessibleHints(elements) {
 
   if (!helpText) {
     helpText = createElement('p', {
+      className: 'filters-help',
       attributes: { id: helpId },
       text: 'La búsqueda acepta coincidencias parciales por nombre o ticker, por ejemplo AAPL.',
     });
@@ -130,6 +132,30 @@ function syncAccessibleHints(elements) {
 
   if (elements.sortSelect instanceof HTMLSelectElement) {
     elements.sortSelect.setAttribute('aria-describedby', helpId);
+  }
+}
+
+function enhanceFilterLayout(elements) {
+  elements.form.classList.add('filters-grid--enhanced');
+
+  const queryGroup = elements.queryInput instanceof HTMLElement ? elements.queryInput.closest('.field-group') : null;
+  const riskGroup = elements.riskSelect instanceof HTMLElement ? elements.riskSelect.closest('.field-group') : null;
+  const sortGroup = elements.sortSelect instanceof HTMLElement ? elements.sortSelect.closest('.field-group') : null;
+
+  queryGroup?.classList.add('field-group--search');
+  riskGroup?.classList.add('field-group--risk');
+  sortGroup?.classList.add('field-group--sort');
+
+  if (elements.queryInput instanceof HTMLInputElement) {
+    elements.queryInput.classList.add('field-control', 'field-control--search');
+  }
+
+  if (elements.riskSelect instanceof HTMLSelectElement) {
+    elements.riskSelect.classList.add('field-control');
+  }
+
+  if (elements.sortSelect instanceof HTMLSelectElement) {
+    elements.sortSelect.classList.add('field-control');
   }
 }
 

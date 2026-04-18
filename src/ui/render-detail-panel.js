@@ -34,22 +34,36 @@ export function renderDetailPanel(rootElement, options = {}) {
         },
         children: [
           createElement('div', {
-            className: 'field-group',
+            className: 'detail-header',
             children: [
-              createElement('p', { text: `${item.category} · Riesgo ${item.riskLevel}` }),
+              createElement('div', {
+                className: 'detail-header__chips',
+                children: [
+                  createElement('p', { className: 'investment-chip investment-chip--category', text: item.category }),
+                  createElement('p', { className: `investment-chip investment-chip--risk investment-chip--${String(item.riskLevel ?? '').toLowerCase()}`, text: `Riesgo ${item.riskLevel}` }),
+                ],
+              }),
               createElement('h2', {
+                className: 'detail-header__title',
                 attributes: { id: titleId },
                 text: `${item.name} (${item.symbol})`,
               }),
               createElement('p', {
+                className: 'detail-header__description',
                 attributes: { id: descriptionId },
                 text: item.description,
+              }),
+              createElement('p', {
+                className: `performance-pill performance-pill--${Number(item.dailyChangePercent) >= 0 ? 'positive' : 'negative'}`,
+                text: `Movimiento diario ${formatPercent(item.dailyChangePercent)}`,
               }),
             ],
           }),
           createMetricsSection(item),
-          createFavoriteButton(item),
-          closeButton,
+          createElement('div', {
+            className: 'modal-actions',
+            children: [createFavoriteButton(item), closeButton],
+          }),
         ],
       }),
     ],
@@ -90,7 +104,7 @@ export function clearDetailPanel(rootElement, options = {}) {
 
 function createMetricsSection(item) {
   return createElement('div', {
-    className: 'field-group',
+    className: 'detail-metrics',
     children: [
       createMetricBlock('Monto invertido', formatCurrency(item.investedAmount)),
       createMetricBlock('Valor actual', formatCurrency(item.currentValue)),
@@ -101,8 +115,11 @@ function createMetricsSection(item) {
 
 function createMetricBlock(label, value) {
   return createElement('article', {
-    className: 'metric-card',
-    children: [createElement('h3', { text: label }), createElement('p', { text: value })],
+    className: 'detail-metric',
+    children: [
+      createElement('p', { className: 'detail-metric__label', text: label }),
+      createElement('p', { className: 'detail-metric__value', text: value }),
+    ],
   });
 }
 
@@ -110,6 +127,7 @@ function createFavoriteButton(item) {
   const isFavorite = Boolean(item.favorite);
 
   return createElement('button', {
+    className: `button button--ghost ${isFavorite ? 'button--favorite-active' : ''}`.trim(),
     text: isFavorite ? '★ Quitar de favoritos' : '☆ Marcar como favorito',
     attributes: {
       type: 'button',
@@ -125,6 +143,7 @@ function createFavoriteButton(item) {
 
 function createCloseButton() {
   return createElement('button', {
+    className: 'button button--secondary',
     text: 'Cerrar detalle',
     attributes: {
       type: 'button',

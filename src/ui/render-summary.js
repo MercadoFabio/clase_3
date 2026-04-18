@@ -24,24 +24,44 @@ export function renderSummary(rootElement, items = []) {
   }
 
   const summary = calculateSummaryMetrics(items);
+  const unrealizedResult = summary.totalCurrentValue - summary.totalInvested;
 
   clearElement(rootElement);
   rootElement.append(
-    createMetricCard('Total invertido', formatCurrency(summary.totalInvested), 'Calculado sobre todas las inversiones cargadas.'),
-    createMetricCard('Valor actual total', formatCurrency(summary.totalCurrentValue), 'Útil para comparar contra el capital originalmente invertido.'),
-    createMetricCard('Cantidad de activos', String(summary.assetCount), 'Cuenta posiciones únicas del dataset completo.'),
+    createMetricCard({
+      eyebrow: 'Capital desplegado',
+      title: 'Total invertido',
+      value: formatCurrency(summary.totalInvested),
+      description: 'Base total comprometida en el portfolio completo.',
+      variant: 'hero',
+    }),
+    createMetricCard({
+      eyebrow: unrealizedResult >= 0 ? 'Resultado latente' : 'Presión del mercado',
+      title: 'Valor actual total',
+      value: formatCurrency(summary.totalCurrentValue),
+      description: `${formatSignedCurrency(unrealizedResult)} frente al capital inicial.`,
+      variant: unrealizedResult >= 0 ? 'positive' : 'warning',
+    }),
+    createMetricCard({
+      eyebrow: 'Cobertura',
+      title: 'Cantidad de activos',
+      value: String(summary.assetCount),
+      description: 'Posiciones únicas disponibles para análisis y seguimiento.',
+      variant: 'neutral',
+    }),
   );
 
   return summary;
 }
 
-function createMetricCard(title, value, description) {
+function createMetricCard({ eyebrow, title, value, description, variant }) {
   return createElement('article', {
-    className: 'metric-card',
+    className: `metric-card metric-card--summary metric-card--${variant}`,
     children: [
-      createElement('h3', { text: title }),
-      createElement('p', { text: value }),
-      createElement('p', { text: description }),
+      createElement('p', { className: 'metric-card__eyebrow', text: eyebrow }),
+      createElement('h3', { className: 'metric-card__title', text: title }),
+      createElement('p', { className: 'metric-card__value', text: value }),
+      createElement('p', { className: 'metric-card__description', text: description }),
     ],
   });
 }
@@ -49,4 +69,8 @@ function createMetricCard(title, value, description) {
 function normalizeNumber(value) {
   const numericValue = Number(value);
   return Number.isFinite(numericValue) ? numericValue : 0;
+}
+
+function formatSignedCurrency(value) {
+  return value > 0 ? `+${formatCurrency(value)}` : formatCurrency(value);
 }

@@ -8,15 +8,45 @@
       name="description"
       content="SPA didáctica para explorar un portfolio de inversiones personales."
     />
+    <script>
+      const savedTheme = globalThis.localStorage?.getItem('investment-theme');
+      const preferredTheme = savedTheme
+        || (globalThis.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = preferredTheme;
+    </script>
   </head>
   <body>
     <div class="app-shell">
       <header class="page-header">
-        <p class="eyebrow">Clase 3 · Dashboard didáctico</p>
-        <h1>Dashboard de inversiones personales</h1>
-        <p class="page-intro">
-          Una base semántica y accesible para enseñar datos, estado y UI sin frameworks.
-        </p>
+        <div class="page-header__content">
+          <div class="page-header__copy">
+            <p class="eyebrow">Clase 3 · Laboratorio visual</p>
+            <p class="page-kicker">Portfolio intelligence</p>
+            <h1>Dashboard de inversiones personales</h1>
+            <p class="page-intro">
+              Un tablero editorial y accesible para leer capital, riesgo y movimiento diario sin
+              perder claridad pedagógica.
+            </p>
+          </div>
+
+          <aside class="page-header__aside" aria-label="Contexto del dashboard">
+            <button
+              type="button"
+              class="theme-toggle"
+              data-theme-toggle="true"
+              aria-pressed="false"
+              aria-label="Activar modo oscuro"
+            >
+              <span class="theme-toggle__label" aria-hidden="true">Modo</span>
+              <span class="theme-toggle__state" data-theme-toggle-label>Claro</span>
+            </button>
+            <p class="page-note">Visión general</p>
+            <p class="page-note__value">4 regiones activas</p>
+            <p class="page-note__description">
+              Resumen, filtros, estados y listado con una jerarquía más clara desde el primer scroll.
+            </p>
+          </aside>
+        </div>
       </header>
 
       <main class="dashboard-layout" id="app" aria-describedby="dashboard-description">
@@ -25,8 +55,9 @@
           inversiones preparado para conectarse con JavaScript modular.
         </p>
 
-        <section class="panel" aria-labelledby="summary-title">
+        <section class="panel panel--summary" aria-labelledby="summary-title">
           <div class="section-heading">
+            <p class="section-heading__eyebrow">KPIs del portfolio</p>
             <h2 id="summary-title">Resumen general</h2>
             <p>Estas métricas se calcularán siempre sobre el dataset completo.</p>
           </div>
@@ -49,14 +80,15 @@
           </div>
         </section>
 
-        <section class="panel" aria-labelledby="filters-title">
+        <section class="panel panel--filters" aria-labelledby="filters-title">
           <div class="section-heading">
+            <p class="section-heading__eyebrow">Controles de lectura</p>
             <h2 id="filters-title">Filtros y orden</h2>
             <p>Controles listos para delegar eventos sin recargar la página.</p>
           </div>
 
           <form id="filters-form" class="filters-grid" novalidate>
-            <div class="field-group">
+            <div class="field-group field-group--search">
               <label for="search-input">Buscar por nombre o ticker</label>
               <input
                 id="search-input"
@@ -67,7 +99,7 @@
               />
             </div>
 
-            <div class="field-group">
+            <div class="field-group field-group--risk">
               <label for="risk-select">Nivel de riesgo</label>
               <select id="risk-select" name="risk">
                 <option value="Todos">Todos</option>
@@ -77,7 +109,7 @@
               </select>
             </div>
 
-            <div class="field-group">
+            <div class="field-group field-group--sort">
               <label for="sort-select">Ordenar por</label>
               <select id="sort-select" name="sortBy">
                 <option value="investedAmount">Monto invertido (descendente)</option>
@@ -87,31 +119,35 @@
           </form>
         </section>
 
-        <section class="panel" aria-labelledby="status-title">
+        <section class="panel panel--status" aria-labelledby="status-title">
           <div class="section-heading">
+            <p class="section-heading__eyebrow">Estados del sistema</p>
             <h2 id="status-title">Estado de la carga</h2>
             <p>La app mostrará loading, error o vacío según el flujo de datos.</p>
           </div>
 
           <div id="status-region" class="status-stack" data-region="status" aria-live="polite" aria-atomic="true">
-            <p id="loading-state" role="status">Esperando la carga inicial del dashboard.</p>
-            <p id="error-state" role="alert" hidden>
+            <p id="loading-state" class="status-card status-card--loading" role="status">
+              Esperando la carga inicial del dashboard.
+            </p>
+            <p id="error-state" class="status-card status-card--error" role="alert" hidden>
               No se pudieron cargar las inversiones. Este mensaje será controlado por la app.
             </p>
-            <p id="empty-state" role="status" hidden>
+            <p id="empty-state" class="status-card status-card--empty" role="status" hidden>
               No hay resultados para los filtros actuales. Probá limpiar la búsqueda o el nivel de riesgo.
             </p>
           </div>
         </section>
 
-        <section class="panel panel--full" aria-labelledby="list-title">
+        <section class="panel panel--list panel--full" aria-labelledby="list-title">
           <div class="section-heading">
+            <p class="section-heading__eyebrow">Universe snapshot</p>
             <h2 id="list-title">Listado de inversiones</h2>
             <p>Las tarjetas se renderizarán en una región segura del DOM.</p>
           </div>
 
           <div id="list-region" class="list-grid" data-region="list" aria-live="polite">
-            <p class="placeholder-card">
+            <p class="placeholder-card placeholder-card--skeleton">
               Todavía no hay tarjetas renderizadas. La fase de integración las conectará con el dataset.
             </p>
           </div>
